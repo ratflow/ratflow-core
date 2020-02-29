@@ -1,7 +1,8 @@
 [Icon Theme]
 Name=Emerald
 Comment=Fresh and simple personality icon theme
-Inherits=
+Inherits=breeze,Adwaita,gnome,hicolor
+Example=folder
 
 # KDE/Plasma Stuff
 DisplayDepth=32
@@ -9,31 +10,46 @@ LinkOverlay=link_overlay
 LockOverlay=lock_overlay
 ZipOverlay=zip_overlay
 DesktopDefault=48
-DesktopSizes=16,22,32,48,64,72,96,128
+DesktopSizes=16,22,32,48,64,128,256
 ToolbarDefault=22
 ToolbarSizes=16,22,32,48
 MainToolbarDefault=22
 MainToolbarSizes=16,22,32,48
 SmallDefault=16
-SmallSizes=16
-PanelDefault=32
-PanelSizes=16,22,32,48,64,72,96,128
+SmallSizes=16,22,32,48
+PanelDefault=48
+PanelSizes=16,22,32,48,64,128,256
+DialogDefault=32
+DialogSizes=16,22,32,48,64,128,256
+KDE-Extensions=.svg
 
-Directories=actions/symbolic,actions/16,actions/22,actions/24,actions/32,actions/48,animations/scalable,apps/16,apps/22,apps/32,apps/48,categories/16,categories/22,categories/32,categories/scalable,devices/16,devices/22,devices/scalable,devices/symbolic,emblems/8,emblems/16,emblems/22,emblems/24,emotes/22,mimetypes/16,mimetypes/22,mimetypes/32,mimetypes/64,places/symbolic,places/16,places/22,places/48,places/64,status/16,status/22,status/24,status/64,status/symbolic
+Directories=actions/symbolic,actions/16,actions/22,actions/24,actions/32,actions/48,animations/16,animations/22,animations/scalable,apps/16,apps/22,apps/32,apps/48,categories/16,categories/22,categories/32,categories/scalable,devices/16,devices/22,devices/scalable,devices/symbolic,emblems/8,emblems/16,emblems/22,emblems/symbolic,emotes/22,mimetypes/16,mimetypes/22,mimetypes/32,mimetypes/64,places/symbolic,places/16,places/22,places/48,places/64,status/16,status/22,status/24,status/48,status/64,status/symbolic
+
+[animations/16]
+Size=16
+Context=Animations
+Type=Fixed
+
+[animations/22]
+Size=22
+Context=Animations
+Type=Scalable
+MinSize=22
+MaxSize=256
 
 [animations/scalable]
 Size=22
 Context=Actions
 Type=Scalable
-MinSize=8
-MaxSize=512
+MinSize=16
+MaxSize=48
 
 [actions/symbolic]
 Context=Actions
 Size=16
-MinSize=8
-MaxSize=512
 Type=Scalable
+MinSize=8
+MaxSize=32
 
 [actions/16]
 Size=16
@@ -73,14 +89,16 @@ Type=Fixed
 [apps/32]
 Size=32
 Context=Applications
-Type=Fixed
+Type=Scalable
+MinSize=16
+MaxSize=512
 
 [apps/48]
 Size=48
 Context=Applications
 Type=Scalable
 MinSize=16
-MaxSize=256
+MaxSize=512
 
 [categories/16]
 Size=16
@@ -102,7 +120,7 @@ Size=48
 Context=Categories
 Type=Scalable
 MinSize=16
-MaxSize=256
+MaxSize=512
 
 [devices/16]
 Size=16
@@ -143,10 +161,12 @@ Size=22
 Context=Emblems
 Type=Fixed
 
-[emblems/24]
-Size=24
+[emblems/symbolic]
 Context=Emblems
-Type=Fixed
+Size=16
+Type=Scalable
+MinSize=8
+MaxSize=512
 
 [emotes/22]
 Size=22
@@ -177,20 +197,19 @@ Size=64
 Context=MimeTypes
 Type=Scalable
 MinSize=16
-MaxSize=256
+MaxSize=512
 
 [places/symbolic]
 Context=Places
 Size=16
-MinSize=16
-MaxSize=512
 Type=Scalable
+MinSize=16
+MaxSize=32
 
 [places/16]
 Size=16
 Context=Places
 Type=Fixed
-MinSize=16
 
 [places/22]
 Size=22
@@ -206,8 +225,8 @@ Type=Fixed
 Size=64
 Context=Places
 Type=Scalable
-MinSize=32
-MaxSize=256
+MinSize=22
+MaxSize=512
 
 [status/16]
 Context=Status
@@ -224,16 +243,23 @@ Context=Status
 Size=24
 Type=Fixed
 
+[status/48]
+Size=48
+Context=Status
+Type=Scalable
+MinSize=16
+MaxSize=512
+
 [status/64]
 Context=Status
 Size=64
-Type=Fixed
+Type=Scalable
+MinSize=16
+MaxSize=512
 
 [status/symbolic]
 Context=Status
 Size=16
 Type=Scalable
-MinSize=8
-MaxSize=256
-
-
+MinSize=16
+MaxSize=512
