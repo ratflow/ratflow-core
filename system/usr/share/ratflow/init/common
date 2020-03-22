@@ -1,0 +1,60 @@
+#!/bin/bash
+
+rfdir=/usr/share/ratflow
+localRfDir="$HOME/.config/ratflow"
+envFile="$localRfDir/profiles/current/env"
+
+function safeCp
+{
+    src="$1"
+    dst="$2"
+
+    if [ ! -e "$src" ]; then
+        echo "ERROR: source file \"$src\" not found"
+        exit 1
+    fi
+
+    mkdir -p $(dirname $dst) 2>/dev/null
+
+    cpWithBackup "$src" "$dst"
+}
+
+function cpWithBackup
+{
+    src="$1"
+    dst="$2"
+
+    if [ -f "$dst" ]; then
+        backupFile="$dst.backup-"$(date +%Y%m%d%H%M)
+        cp -rv "$dst" "$backupFile"
+        cp -rvf "$src" "$dst"
+    else
+        cp -rv "$src" "$dst"
+    fi
+}
+
+function generateProfileEnvFile
+{
+    if [ ! -f "$envFile" ]; then
+
+        askForModKey
+        mkdir -p $(dirname "$envFile") ||:
+        echo "export RF_MOD_KEY=$modKey" > "$envFile"
+
+    fi
+}
+
+function askForModKey
+{
+    while [ -z "$modKey" ]; do
+            modKey=$(zenity \
+                --text="Please select MOD key" \
+                --list \
+                --column=Check \
+                --column="Key name" \
+                --column "Key" \
+                TRUE "Mod4" "WIN key" \
+                FALSE "Mod1" "ALT Key" \
+                --radiolist)
+    done
+}

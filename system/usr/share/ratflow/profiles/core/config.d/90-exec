@@ -1,0 +1,8 @@
+#------------------------------------------------
+#
+# autostart - login command execution
+#
+#------------------------------------------------
+
+# ensure that notification daemon is running
+exec --no-startup-id dunst

@@ -1,6 +1,6 @@
  
 project=ratflow-core
-pkgVersion=1.0.1
+pkgVersion=1.0.2
 pkgSource=ratflow
 maintainer=ratflow
 license=GPL
