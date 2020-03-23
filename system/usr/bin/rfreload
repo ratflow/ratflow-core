@@ -4,13 +4,15 @@
 ## Reload ratflow config by joining xx-<name> files
 ## from ~/.config/ratflow/profiles/current/config.d
 ## and evaluating shell expressions within ${{}} tags.
-## The 'i3-msg reload' will be executed afterwards.
+## The 'i3-msg reload' or 'i3-msg restart' will be 
+## executed afterwards.
 ##
 ## Usage: $SCRIPT_FILENAME [options]
 ##
 ## Options:
 ##   -p, --profile <profile>   Change current profile
 ##   -n, --no-apply            Generate config file but do not call i3 to reload it
+##   -r, --restart             Restart i3 instead of just reloading config file
 ##   -i, --info                Show current profile info
 ##   -h, --help                Display this message.
 ##   -v, --version             Display script version.
@@ -41,6 +43,7 @@ PROFILE_CONFIG_DIR="$CURRENT_PROFILE/config.d"
 
 customProfile=
 reloadConfig=true
+restartI3=false
 
 #===========================================
 
@@ -59,30 +62,32 @@ function usage {
 function main
 {   
     while [ $# -gt 0 ]; do
-	case $1 in
-	    ('-h'|'--help')
-		usage 2>&1;;
+    case $1 in
+        ('-h'|'--help')
+        usage 2>&1;;
             ('-v'|'--version')
                 echo "$SCRIPT_NAME v$SCRIPT_VERSION"
                 exit 0;;
         ('-i'|'--info')
-		showInfo
-		exit 0;;
-	    ('-p'|'--profile')
-		shift
-		customProfile="$1";;
+        showInfo
+        exit 0;;
+        ('-p'|'--profile')
+        shift
+        customProfile="$1";;
+        ('-r'|'--restart')
+        restartI3=true;;
         ('-n'|'--no-apply')        
-		reloadConfig=false;;
-	    ('--')
-		shift
-		break;;
-	    ('-'*)
-		echo -e "\n$0 $1: unknown option. Use --help to learn more.\n"
-		exit 3
-		break;;
-	esac
-	
-	shift
+        reloadConfig=false;;
+        ('--')
+        shift
+        break;;
+        ('-'*)
+        echo -e "\n$0 $1: unknown option. Use --help to learn more.\n"
+        exit 3
+        break;;
+    esac
+
+    shift
     done
 
     run
@@ -103,7 +108,11 @@ function run
     generateConfigFile
     
     if [ $reloadConfig == true ]; then
-        reloadConfigFile
+        if [ $restartI3 == true ]; then
+            restartI3wm
+        else
+            reloadConfigFile
+        fi
     fi
 }
 
@@ -111,20 +120,20 @@ function updateCurrentProfile
 {
     profilePath=$"${CONFIG_DIR}/profiles/$customProfile"
     if [ -d "$profilePath" ]; then
-	echo "Setting $customProfile as current profile"
-	#rm "$CURRENT_PROFILE"
-	ln -Tvsf "$profilePath" "$CURRENT_PROFILE"
+    echo "Setting $customProfile as current profile"
+    #rm "$CURRENT_PROFILE"
+    ln -Tvsf "$profilePath" "$CURRENT_PROFILE"
     else
-	echo "Cannot use given profile, $profilePath directory not found"
-	exit 1
+    echo "Cannot use given profile, $profilePath directory not found"
+    exit 1
     fi
 }
 
 function useDefaultIfNoCurrent
 {
     if [ ! -d "$CURRENT_PROFILE" ]; then
-	echo "Setting default profile as current profile"
-	ln -vsf "$DEFAULT_PROFILE" "$CURRENT_PROFILE"
+    echo "Setting default profile as current profile"
+    ln -vsf "$DEFAULT_PROFILE" "$CURRENT_PROFILE"
     fi
 }
 
@@ -168,6 +177,11 @@ function generateConfigFile
 function reloadConfigFile
 {
     i3-msg reload
+}
+
+function restartI3wm
+{
+    i3-msg restart
 }
 
 function showInfo
