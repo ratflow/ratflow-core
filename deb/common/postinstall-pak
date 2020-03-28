@@ -9,5 +9,4 @@ themeString='QT_QPA_PLATFORMTHEME=qt5ct'
 if ! grep -q "$themeString" $envFile
 then
     echo "$themeString" >> $envFile
-    echo "dopisano"
 fi
