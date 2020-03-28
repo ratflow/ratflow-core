@@ -1,0 +1,13 @@
+NOTE: this image uses ratflow-core package from remote repository, NOT from local sources.
+
+Build:
+
+docker build -t ratflow-core-bionic .
+
+Run:
+
+docker run -dt --name rfc-bionic -v $HOME:/host ratflow-core-bionic
+
+Connect:
+
+vncviewer $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' rfc-bionic)
