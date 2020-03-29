@@ -3,6 +3,7 @@
 rfdir=/usr/share/ratflow
 localRfDir="$HOME/.config/ratflow"
 envFile="$localRfDir/profiles/current/env"
+defaultProfileTmp=/tmp/rf-default-profile
 
 function safeCp
 {
@@ -57,4 +58,15 @@ function askForModKey
                 FALSE "Mod1" "ALT Key" \
                 --radiolist)
     done
+}
+
+function setDefaultProfile
+{
+  profile=$1
+  echo -e $profile > $defaultProfileTmp
+}
+
+function getDefaultProfile
+{
+  cat $defaultProfileTmp
 }

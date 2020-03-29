@@ -106,7 +106,7 @@ function run
     useDefaultIfNoCurrent
     generateProfileEnvFile
     generateConfigFile
-    
+
     if [ $reloadConfig == true ]; then
         if [ $restartI3 == true ]; then
             restartI3wm

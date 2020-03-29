@@ -6,4 +6,4 @@ safeCp $rfdir/profiles "$localRfDir/profiles"
 safeCp $rfdir/app_configs/terminator-config $HOME/.config/terminator/config
 safeCp $rfdir/app_configs/dunstrc $HOME/.config/dunst/dunstrc
 
-rfreload --no-apply --profile core
+setDefaultProfile core
