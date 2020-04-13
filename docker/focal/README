@@ -1,0 +1,13 @@
+NOTE: this image uses ratflow-core package from remote repository, NOT from local sources.
+
+Build:
+
+docker build -t ratflow-core-focal .
+
+Run:
+
+docker run -dt --name rfc-focal -v $HOME:/host --cap-add NET_ADMIN ratflow-core-focal
+
+Connect:
+
+vncviewer $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' rfc-focal)
