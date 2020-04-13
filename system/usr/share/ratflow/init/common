@@ -48,15 +48,21 @@ function generateProfileEnvFile
 function askForModKey
 {
     while [ -z "$modKey" ]; do
-            modKey=$(zenity \
+            modKey=$(yad \
+                --title="Setup new ratflow profile" \
                 --text="Please select MOD key" \
                 --list \
                 --column=Check \
                 --column="Key name" \
                 --column "Key" \
+                --splash \
+                --center \
+                --width 280 \
+                --height 180 \
+                --separator ' ' \
                 TRUE "Mod4" "WIN key" \
                 FALSE "Mod1" "ALT Key" \
-                --radiolist)
+                --radiolist | awk '{print $2}')
     done
 }
 
