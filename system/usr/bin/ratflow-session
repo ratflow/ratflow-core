@@ -34,21 +34,21 @@ set -e          # exit on command errors (so you MUST handle exit codes properly
 #===========================================
 
 
-function usage 
+function usage
 {
   [ "$*" ] && echo "$0: $*"
   sed -n '/^##/,/^$/s/^## \{0,1\}//p' "$SCRIPT_DIR/$SCRIPT_FILENAME" |
       sed "s/\$SCRIPT_NAME/$SCRIPT_NAME/g" |
       sed "s/\$SCRIPT_FILENAME/$SCRIPT_FILENAME/g" |
       sed "s/\$SCRIPT_VERSION/$SCRIPT_VERSION/g"
-      
+
   exit 2
 } 2>/dev/null
 
 
-function main 
+function main
 {
-    
+
     while [ $# -gt 0 ]; do
 	case $1 in
 	    ('-h'|'--help')
@@ -61,20 +61,21 @@ function main
 		exit 3
 		break;;
 	esac
-	
+
 	shift
     done
-    
+
     run
 }
 
 #===========================================
 
 
-function run 
+function run
 {
+    curentProfileLink="$localRfDir/profiles/current"
 
-    if [ ! -d "$localRfDir" ]
+    if [[ ! -L "$curentProfileLink" || ! -d "$curentProfileLink" ]]
 	then
         initUserConfigDir
 	fi
@@ -95,7 +96,7 @@ function initUserConfigDir
 
 
 
-function startWindowManager 
+function startWindowManager
 {
     rfreload --no-apply
     i3 -c "$localRfDir/config"
