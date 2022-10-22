@@ -1,0 +1,11 @@
+i3 \(\>= 4.17\),
+i3blocks \(\>= 1.4\),
+i3lock,
+dbus-x11,
+suckless-tools,
+x11-xserver-utils,
+feh,
+terminator,
+libnotify-bin,
+dunst,
+yad
