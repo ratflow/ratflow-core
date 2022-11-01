@@ -1,7 +1,7 @@
 
 project=ratflow-core
-pkgVersion=1.1.1
-pkgRelease=9
+pkgVersion=1.1.2
+pkgRelease=1
 pkgSource=ratflow
 pkgGroup=ratflow
 maintainer=ratflow
