@@ -10,3 +10,4 @@ if ! grep -q "$themeString" $envFile
 then
     echo "$themeString" >> $envFile
 fi
+
