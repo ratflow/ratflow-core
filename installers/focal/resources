@@ -1,0 +1,4 @@
+system/usr/bin/ratflow-session /usr/bin/ratflow-session
+system/usr/bin/rfreload /usr/bin/rfreload
+system/usr/share/ratflow /usr/share/ratflow
+system/usr/share/xsessions/ratflow.desktop /usr/share/xsessions/ratflow.desktop

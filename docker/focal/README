@@ -2,11 +2,11 @@ NOTE: this image uses ratflow-core package from remote repository, NOT from loca
 
 Build:
 
-docker build -t ratflow-core-focal .
+docker-compose build
 
 Run:
 
-docker run -dt --name rfc-focal -v $HOME:/host --cap-add NET_ADMIN ratflow-core-focal
+docker-compose up -d && docker-compose logs -f
 
 Connect:
 
