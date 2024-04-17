@@ -45,6 +45,6 @@ RUN cd /src/ratflow-core && ls -lah && ./install.sh ./installers/focal
 EXPOSE 5900/tcp
 
 # Run commands when the container launches
-ADD docker/focal/entrypoint.sh /entrypoint.sh
+ADD docker/noble/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

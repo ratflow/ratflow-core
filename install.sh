@@ -8,6 +8,7 @@ usage() {
 
 # Function to install dependencies
 installDependencies() {
+    apt update
     local dependencies=()
     while IFS= read -r package; do
         dependencies+=("$package")
@@ -18,7 +19,7 @@ installDependencies() {
     fi
 }
 
-# Function to handle resource installation
+
 installResource() {
     local src=$1
     local dst=$2
@@ -44,15 +45,14 @@ installResource() {
         echo "Backed up $dst to $backupDir"
     fi
 
-    # Ensure destination directory exists
-    mkdir -p "$(dirname "$dst")"
-
     # Copy the source to destination
     if [ -d "$src" ]; then
         # Copy all contents recursively with replacement when FORCE_MODE is 1
+        mkdir -p "$dst"
         cp -ra "$src/"* "$dst"
     else
         # This will copy files with replacement when FORCE_MODE is 1
+        mkdir -p "$(dirname "$dst")"
         cp -rv "$src" "$dst"
     fi
 }
