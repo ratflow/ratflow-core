@@ -23,12 +23,20 @@ installResource() {
     local src=$1
     local dst=$2
 
+    # Check for existence of destination and FORCE_MODE not set
     if [ -e "$dst" ] && [ $FORCE_MODE -eq 0 ]; then
-        echo "Skipping existing resource: $dst"
-        echo "Note: use -f or --force to backup and replace"
+        if [ -d "$src" ]; then
+            echo "Copying contents without replacing existing files: $dst"
+            # Copy directory contents recursively without replacing existing files
+            cp -rn "$src/"* "$dst"
+        else
+            echo "Skipping existing resource: $dst"
+            echo "Note: use -f or --force to backup and replace"
+        fi
         return
     fi
 
+    # Handle force mode when destination exists
     if [ $FORCE_MODE -eq 1 ] && [ -e "$dst" ]; then
         local backupDir="/var/${PROJECT_NAME}-backups/$(date +%Y%m%d%H%M%S)/"
         mkdir -p "$backupDir$(dirname "$dst")"
@@ -36,9 +44,19 @@ installResource() {
         echo "Backed up $dst to $backupDir"
     fi
 
+    # Ensure destination directory exists
     mkdir -p "$(dirname "$dst")"
-    cp -rv "$src" "$dst"
+
+    # Copy the source to destination
+    if [ -d "$src" ]; then
+        # Copy all contents recursively with replacement when FORCE_MODE is 1
+        cp -ra "$src/"* "$dst"
+    else
+        # This will copy files with replacement when FORCE_MODE is 1
+        cp -rv "$src" "$dst"
+    fi
 }
+
 
 # Function to run scripts in a directory
 runScripts() {
