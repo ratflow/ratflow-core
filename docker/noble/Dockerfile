@@ -38,7 +38,7 @@ RUN echo "DISPLAY=:0" >> /etc/environment
 # Install ratflow-core
 
 COPY . /src/ratflow-core
-RUN cd /src/ratflow-core && ls -lah && ./install.sh ./installers/focal
+RUN cd /src/ratflow-core && ls -lah && ./install.sh ./installers/noble
 
 # Run entrypoint
 
