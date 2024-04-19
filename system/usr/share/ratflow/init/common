@@ -25,7 +25,7 @@ function cpWithBackup
     src="$1"
     dst="$2"
 
-    if [ -f "$dst" ]; then
+    if [ -e "$dst" ]; then
         backupFile="$dst.backup-"$(date +%Y%m%d%H%M)
         cp -rv "$dst" "$backupFile"
         cp -rvf "$src" "$dst"
